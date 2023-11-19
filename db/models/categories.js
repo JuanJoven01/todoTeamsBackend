@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { CategoriesSchema } = require('../migrations/20231118234253-create-categories');
 module.exports = (sequelize, DataTypes) => {
   class Categories extends Model {
     /**
@@ -17,9 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   }
-  Categories.init({
-    category: DataTypes.STRING
-  }, {
+  Categories.init(CategoriesSchema, {
     sequelize,
     modelName: 'Categories',
   });

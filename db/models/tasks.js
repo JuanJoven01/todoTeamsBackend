@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { TasksSchema } = require('../migrations/20231118234427-create-tasks');
 module.exports = (sequelize, DataTypes) => {
   class Tasks extends Model {
     /**
@@ -13,16 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Tasks.init({
-    title: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    completed: DataTypes.BOOLEAN,
-    deadline: DataTypes.DATE,
-    finishedAt: DataTypes.DATE,
-    categoriesId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER,
-    teamId: DataTypes.INTEGER
-  }, {
+  Tasks.init(TasksSchema, {
     sequelize,
     modelName: 'Tasks',
   });

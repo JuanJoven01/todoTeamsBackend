@@ -5,7 +5,7 @@ const models = require('../db/models/index');
 
 router.get('/', async (req, res) => {
   try {
-    const tasks = await models.Task.findAll();
+    const tasks = await models.Tasks.findAll();
     res.json(tasks);
   } catch (error) {
     res.status(500).json({ message: error.message });
