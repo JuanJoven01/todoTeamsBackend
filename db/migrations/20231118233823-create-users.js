@@ -30,9 +30,10 @@ module.exports = {
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        field: 'updated_at',
       },
-      field: 'updated_at',
+      
     });
   },
   async down(queryInterface, Sequelize) {
