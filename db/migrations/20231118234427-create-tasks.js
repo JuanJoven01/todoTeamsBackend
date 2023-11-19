@@ -10,19 +10,25 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:false,
       },
       description: {
         type: Sequelize.TEXT
       },
       completed: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        allowNull:false,
+        defaultValue: false,
       },
       deadline: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull:false,
+        defaultValue: Sequelize.NOW,
       },
       finishedAt: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull:true,
       },
       categoriesId: {
         type: Sequelize.INTEGER,
