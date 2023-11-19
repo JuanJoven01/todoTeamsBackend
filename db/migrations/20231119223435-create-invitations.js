@@ -2,12 +2,28 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users_Teams', {
+    await queryInterface.createTable('Invitations', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },
+      senderId: {
+        type: Sequelize.INTEGER,
+        field: 'sender_id', 
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
+      },
+      receiverId: {
+        type: Sequelize.INTEGER,
+        field: 'receiver_id',
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       teamId: {
         type: Sequelize.INTEGER,
@@ -17,13 +33,10 @@ module.exports = {
           key: 'id'
         }
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        field: 'user_id',
-        references: {
-          model: 'Users',
-          key: 'id'
-        }
+      status: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: 'pending',
       },
       createdAt: {
         allowNull: false,
@@ -38,6 +51,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users_Teams');
+    await queryInterface.dropTable('Invitations');
   }
 };

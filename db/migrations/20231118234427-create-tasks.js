@@ -29,9 +29,11 @@ module.exports = {
       finishedAt: {
         type: Sequelize.DATE,
         allowNull:true,
+        field: 'finished_at',
       },
       categoriesId: {
         type: Sequelize.INTEGER,
+        field: 'categories_id',
         references: {
           model: 'Categories',
           key: 'id'
@@ -39,6 +41,7 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
+        field: 'user_id',
         references: {
           model: 'Users',
           key: 'id'
@@ -46,6 +49,7 @@ module.exports = {
       },
       teamId: {
         type: Sequelize.INTEGER,
+        field: 'team_id',
         references: {
           model: 'Teams',
           key: 'id'
@@ -53,11 +57,13 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        field: 'created_at',
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        field: 'updated_at',
       }
     });
   },

@@ -10,20 +10,25 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsToMany(models.User,{
-        through: 'User_Teams',
+      this.belongsToMany(models.Users,{
+        through: 'Users_Teams',
         as: 'users',
         foreignKey: 'teamId'
       }),
       this.hasMany(models.Tasks,{
         as: 'tasks',
         foreignKey: 'teamId'
+      }),
+      this.hasMany(models.Invitations,{
+        as: 'invitations',
+        foreignKey: 'teamId'
       })
       // define association here
     }
   }
   Teams.init({
-    alias: DataTypes.STRING
+    alias: DataTypes.STRING,
+    admin: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Teams',
