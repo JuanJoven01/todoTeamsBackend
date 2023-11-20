@@ -14,7 +14,20 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
+<<<<<<< HEAD
   Tasks.init(TasksSchema, {
+=======
+  Tasks.init({
+    title: DataTypes.STRING,
+    description: DataTypes.TEXT,
+    completed: DataTypes.BOOLEAN,
+    deadline: DataTypes.DATE,
+    finishedAt: DataTypes.DATE,
+    categoryId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
+    teamId: DataTypes.INTEGER
+  }, {
+>>>>>>> 88548b3 (Review files)
     sequelize,
     modelName: 'Tasks',
   });

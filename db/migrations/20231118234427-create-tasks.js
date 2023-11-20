@@ -99,7 +99,7 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull:true,
       },
-      categoriesId: {
+      categoryId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Categories',
