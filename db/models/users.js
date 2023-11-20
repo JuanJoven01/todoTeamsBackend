@@ -32,7 +32,18 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   }
+<<<<<<< HEAD
   Users.init(UserSchema, {
+=======
+  Users.init({
+    name: DataTypes.STRING,
+    password: DataTypes.STRING,
+    mail: DataTypes.STRING,
+    code: DataTypes.STRING,
+    isActive: DataTypes.BOOLEAN,
+
+  }, {
+>>>>>>> 46d67d0 (fields deleted)
     sequelize,
     modelName: 'Users',
   });
