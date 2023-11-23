@@ -2,7 +2,6 @@
 const {
   Model
 } = require('sequelize');
-const { InvitationsSchema } = require('../migrations/20231119223435-create-invitations');
 module.exports = (sequelize, DataTypes) => {
   class Invitations extends Model {
     /**
@@ -14,7 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Invitations.init(InvitationsSchema, {
+  Invitations.init({
+    senderId: DataTypes.INTEGER,
+    receiverId: DataTypes.INTEGER,
+    teamId: DataTypes.INTEGER,
+    status: DataTypes.STRING
+  }, {
     sequelize,
     modelName: 'Invitations',
   });

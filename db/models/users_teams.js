@@ -2,7 +2,6 @@
 const {
   Model
 } = require('sequelize');
-const { UsersTeamsSchema } = require('../migrations/20231118234116-create-users-teams');
 module.exports = (sequelize, DataTypes) => {
   class Users_Teams extends Model {
     /**
@@ -14,7 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Users_Teams.init(UsersTeamsSchema, {
+  Users_Teams.init({
+    teamId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER
+  }, {
     sequelize,
     modelName: 'Users_Teams',
   });

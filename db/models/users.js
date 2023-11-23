@@ -2,9 +2,6 @@
 const {
   Model
 } = require('sequelize');
-
-const {UserSchema} = require('../migration/20201118233823-create-users')
-
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**
@@ -32,9 +29,6 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   }
-<<<<<<< HEAD
-  Users.init(UserSchema, {
-=======
   Users.init({
     name: DataTypes.STRING,
     password: DataTypes.STRING,
@@ -43,7 +37,6 @@ module.exports = (sequelize, DataTypes) => {
     isActive: DataTypes.BOOLEAN,
 
   }, {
->>>>>>> 46d67d0 (fields deleted)
     sequelize,
     modelName: 'Users',
   });

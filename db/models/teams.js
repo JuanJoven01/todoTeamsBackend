@@ -2,9 +2,6 @@
 const {
   Model
 } = require('sequelize');
-
-const TeamsSchema = require('../migrations/20201118233824-create-teams')
-
 module.exports = (sequelize, DataTypes) => {
   class Teams extends Model {
     /**
@@ -29,7 +26,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Teams.init(TeamsSchema, {
+  Teams.init({
+    alias: DataTypes.STRING,
+    admin: DataTypes.STRING
+  }, {
     sequelize,
     modelName: 'Teams',
   });
