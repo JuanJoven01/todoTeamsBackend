@@ -23,7 +23,7 @@ module.exports = {
       },
       deadline: {
         type: Sequelize.DATE,
-        allowNull:false,
+        allowNull:true,
         defaultValue: Sequelize.NOW,
       },
       finishedAt: {
