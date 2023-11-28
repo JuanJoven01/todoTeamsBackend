@@ -3,6 +3,8 @@ const app = express();
 const port = 3000;
 const routerApi = require('./routes/index');
 
+const {errorHandler, errorLogger, boomErrorHandler} = require('./middlewares/error.handler');
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
@@ -12,6 +14,9 @@ app.listen(port, () => {
 });
 
 app.use(express.json());
+app.use(errorLogger);
+app.use(boomErrorHandler);
+app.use(errorHandler);
 
 
 routerApi(app);

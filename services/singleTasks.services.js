@@ -1,33 +1,35 @@
 const Tasks = require ('../db/models').Tasks;
 
-class tasksServices {
+class singleTasksServices  {
     constructor() {
 
     }
 
-    async getAllTasks(){
-        const tasks = await Tasks.findAll();
+    static async getAllTasks(userId){
+        const tasks = await Tasks.findAll({
+            where: {
+                userId: userId
+            }
+        });
         return tasks;
     }
 
-    async createTask(task){
-
+    static async createTask(task){
         await Tasks.create(task);
         return task;
-
     }
 
-    async updateTask(taskId, task){
+    static async updateTask(taskId, task){
         const taskToUpdate = await Tasks.findByPk(taskId);
         await taskToUpdate.update(task);
         return taskToUpdate;
     }
 
-    async deleteTask(taskId){
+    static async deleteTask(taskId){
         const taskToDelete = await Tasks.findByPk(taskId);
         await taskToDelete.destroy();
         return taskToDelete;
     }
 }
 
-module.exports = tasksServices;
+module.exports = singleTasksServices;

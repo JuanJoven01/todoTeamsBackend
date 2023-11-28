@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const Users = require('../db/models').Users;
+const usersServices = require('../services/users.service');
 
 router.get('/', async (req, res) => {
   try {
-    const users = await Users.findAll();
+    const users = await usersServices();
     res.json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });
