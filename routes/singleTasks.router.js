@@ -12,9 +12,9 @@ router.get('/',
   validatorHandler(getTasksSchema, 'body'),
   async (req, res, next) => {
   try {
-    const payload = req.user;
-    //const tasks = await singleTasksServices.getAllTasks(1)
-    res.json(payload);
+    const  payload = req.user;
+    const tasks = await singleTasksServices.getAllTasks(payload.sub)
+    res.json(tasks);
   } catch (error) {
     next(error)
   }

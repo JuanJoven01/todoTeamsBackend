@@ -1,7 +1,7 @@
 const joi = require('joi');
 
-const title = joi.string().min(4).max(15);
-const description = joi.string().max(100);
+const title = joi.string().min(4).max(30);
+const description = joi.string().max(300);
 const completed = joi.boolean()
 const deadline = joi.date()
 const finishedAt = joi.date()

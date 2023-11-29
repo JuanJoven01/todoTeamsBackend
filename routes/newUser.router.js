@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
     next(error);
   }
 })
-
+// To create a new user, we need to validate the body of the request.
 router.post('/', 
 validatorHandler(createUserSchema, 'body'),
 async (req, res, next) => {

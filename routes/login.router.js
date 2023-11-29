@@ -4,6 +4,8 @@ const passport = require('passport');
 require('dotenv').config()
 const jwt = require('jsonwebtoken');
 
+
+// Login route
 router.post('/', 
   passport.authenticate('local', { session: false}),
   async (req, res, next) => {
