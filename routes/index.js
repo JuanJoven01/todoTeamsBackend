@@ -7,7 +7,7 @@ const recoveryRouter = require('./recovery.router');
 
 
 function routerApi(app){
-    app.use('/', loginRouter)
+    app.use('/login', loginRouter)
     app.use('/single-tasks', singleTasksRouter)
     app.use('/teams', teamsRouter)
     app.use('/newUser', newUserRouter)

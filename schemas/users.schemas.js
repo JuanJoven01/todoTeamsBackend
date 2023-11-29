@@ -22,6 +22,8 @@ const updateUserSchema = joi.object({
     isActive
 });
 
-const getUserSchema = joi.object({
+const getSingleUserSchema = joi.object({
     name : name.required(),
 });
+
+module.exports = {createUserSchema, updateUserSchema, getSingleUserSchema};

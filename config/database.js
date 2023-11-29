@@ -1,5 +1,4 @@
 require('dotenv').config()
-console.log(process.env.POSTGRES_USER)
 
 module.exports ={
   "development": {

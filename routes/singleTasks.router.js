@@ -3,15 +3,18 @@ const router = express.Router();
 const singleTasksServices = require('../services/singleTasks.services.js');
 const validatorHandler = require('../middlewares/validator.handler.js');
 const { createTasksSchema, updateTasksSchema, getTasksSchema } = require('../schemas/tasks.schema.js'); 
-const checkApiKey = require('../middlewares/auth.handler.js');
+//const checkApiKey = require('../middlewares/auth.handler.js');
+const passport = require('passport');
 
 
 router.get('/', 
-  checkApiKey,
+  passport.authenticate('jwt', { session: false}),
+  validatorHandler(getTasksSchema, 'body'),
   async (req, res, next) => {
   try {
-    const tasks = await singleTasksServices.getAllTasks(1)
-    res.json(tasks);
+    const payload = req.user;
+    //const tasks = await singleTasksServices.getAllTasks(1)
+    res.json(payload);
   } catch (error) {
     next(error)
   }
