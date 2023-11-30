@@ -2,6 +2,8 @@ const Users = require('../db/models').Users;
 
 const bcrypt = require('bcrypt');
 
+const ActiveUserMail = require ('../utils/mail/activeUser.mail')
+
 class usersServices {
     constructor() {
 
@@ -31,6 +33,8 @@ class usersServices {
         });
         return user;
     }
+
+    static async sendActivationCode (code, email){
 }
 
 module.exports = usersServices;
