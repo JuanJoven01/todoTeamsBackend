@@ -1,25 +1,30 @@
 const express = require('express');
 const router = express.Router();
 
-const Users = require('../db/models').Users;
-
-router.get('/', async (req, res) => {
-  try {
-    const users = await Users.findAll();
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-})
-
+const sendRecoveryPassword = require('../services/users.service').sendRecoveryPassword;
+const recoveryPassword = require('../services/users.service').recoveryPassword;
 
 router.post('/', async (req, res) => {
   try {
-    const user = await Users.create(req.body);
-    res.status(201).json(user);
+    const mail = req.body.mail;
+    const host = req.headers.host;
+    const user = await sendRecoveryPassword(mail, host);
+    res.json(user);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 })
+
+router.post('/change-pass', async (req, res) => {
+  try {
+    const token = req.query.token;
+    const user = await recoveryPassword(token, newPassword);
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+})
+
+
 
 module.exports = router;
