@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsToMany(models.Users,{
+        // define association here
         through: 'Users_Teams',
         as: 'users',
         foreignKey: 'teamId'
@@ -22,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Invitations,{
         as: 'invitations',
         foreignKey: 'teamId'
-      })
-      // define association here
+      }) 
+      
     }
   }
   Teams.init({

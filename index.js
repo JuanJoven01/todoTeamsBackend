@@ -6,6 +6,7 @@ const routerApi = require('./routes/index');
 
 const {errorHandler, errorLogger, boomErrorHandler} = require('./middlewares/error.handler');
 
+// to get and use auth strategies
 require('./utils/auth/index');
 
 app.get('/', (req, res) => {
@@ -15,7 +16,6 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 });
-
 
 app.use(express.json());
 app.use(errorLogger);

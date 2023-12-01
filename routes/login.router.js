@@ -5,7 +5,7 @@ require('dotenv').config()
 const jwt = require('jsonwebtoken');
 
 
-// Login route
+// Login route, we need to validate the user with passport
 router.post('/', 
   passport.authenticate('local', { session: false}),
   async (req, res, next) => {

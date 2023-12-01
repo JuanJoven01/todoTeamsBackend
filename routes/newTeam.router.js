@@ -1,24 +1,37 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
+const boom = require('@hapi/boom');
 
-const Teams = require('../db/models').Teams;
+const validatorHandler = require('../middlewares/validator.handler');
+const createTeamSchema = require('../schemas/teams.schema').createTeamSchema;
 
-router.get('/', async (req, res) => {
-  try {
-    const teams = await Teams.findAll();
-    res.json(teams);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-})
+ //function create a new team by the services
+const teamsServices = require('../services/teams.services');
 
-router.post('/', async (req, res) => {
-  try {
-    const team = await Teams.create(req.body);
-    res.status(201).json(team);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+// to get my teams
+// router.get('/', async (req, res) => {
+//   try {
+//     const team = await Teams.create(req.body);
+//     res.status(201).json(team);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// })
+
+// to create a new team
+router.post('/', 
+passport.authenticate('jwt', { session: false}),
+validatorHandler(createTeamSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const team = req.body;
+      const user = req.user;
+      const newTeam = await teamsServices.createTeam(team, user);
+      res.json (newTeam)
+    } catch (error) {
+      next(error);
+    }
 })
 
 module.exports = router;

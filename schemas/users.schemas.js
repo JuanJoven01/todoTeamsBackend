@@ -15,15 +15,14 @@ const createUserSchema = joi.object({
 });
 
 const updateUserSchema = joi.object({
-    name : name.required(),
     password : password.required(),
     mail,
     code,
     isActive
 });
 
-const getSingleUserSchema = joi.object({
-    name : name.required(),
-});
+// const getSingleUserSchema = joi.object({
+//     name : name.required(),
+// });
 
-module.exports = {createUserSchema, updateUserSchema, getSingleUserSchema};
+module.exports = {createUserSchema , updateUserSchema};

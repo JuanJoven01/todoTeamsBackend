@@ -48,8 +48,7 @@ class usersServices {
             
             await sendUserMail(newUser.mail, 
                 'Activation link', 
-                'Your activation link is: ',
-                host + 'activate-user?token=' + token );
+                'Your activation link is: ' + host + '/activate-user?token=' + token );
 
             await Users.update({
                 code: token
@@ -112,43 +111,49 @@ class usersServices {
 
     static async resendActivationCode (mail, host){
         try {
-            const user = await Users.findOne({
-                where: {
-                    mail: mail
-                }
-            });
-            if (!user) {
-                throw boom.badRequest('Invalid user');
-            }
-            else if (user.isActive === true) {
-                throw boom.badRequest('User already activated');
-            }
-
-            else {
-                let payload = {
-                    sub : user.id,
-                    name : user.name,
-                    mail : user.mail
-                }
-        
-                let token = jwt.sign(payload, process.env.JWT_KEY, {expiresIn: '15m'});
-                
-                await sendUserMail(user.mail, 
-                    'Activation link', 
-                    'Your activation link is: ',
-                    host + 'activate-user?token=' + token );
-        
-                await Users.update({
-                    code: token
-                },
-                {
+            if (!mail | !host){
+                throw boom.badRequest('invalid User or host')
+            }else{
+                const user = await Users.findOne({
                     where: {
-                        name: user.name
+                        mail: mail
                     }
                 });
-                
-                return user;
+                console.log(user)
+                if (!user) {
+                    throw boom.badRequest('Invalid user');
+                }
+                else if (user.isActive === true) {
+                    throw boom.badRequest('User already activated');
+                }
+    
+                else {
+                    let payload = {
+                        sub : user.id,
+                        name : user.name,
+                        mail : user.mail
+                    }
+            
+                    let token = jwt.sign(payload, process.env.JWT_KEY, {expiresIn: '15m'});
+                    
+                    await sendUserMail(user.mail, 
+                        'Activation link', 
+                        'Your activation link is: ' +
+                        host + '/activate-user?token=' + token );
+            
+                    await Users.update({
+                        code: token
+                    },
+                    {
+                        where: {
+                            name: user.name
+                        }
+                    });
+                    
+                    return user;
+                }
             }
+            
 
             
         } catch (error) {
@@ -161,40 +166,45 @@ class usersServices {
 
     static async sendRecoveryPassword (mail, host){
         try {
-            const user = await Users.findOne({
-                where: {
-                    mail: mail
-                }
-            });
-            if (!user) {
-                throw boom.badRequest('Invalid user');
-            }
-            else {
-                let payload = {
-                    sub : user.id,
-                    name : user.name,
-                    mail : user.mail
-                }
-        
-                let token = jwt.sign(payload, process.env.JWT_KEY, {expiresIn: '15m'});
-                
-                await sendUserMail(user.mail, 
-                    'Recovery link', 
-                    'Your recovery link is: ',
-                    host + 'recovery/change-pass?token=' + token );
-        
-                await Users.update({
-                    code: token
-                },
-                {
+            if (!mail | !host){
+                throw boom.badRequest('invalid User or host')
+                }else{
+                const user = await Users.findOne({
                     where: {
-                        name: user.name
+                        mail: mail
                     }
                 });
-                
-                return user;
-            }
+                if (!user) {
+                    throw boom.badRequest('Invalid user');
+                }
+                else {
+                    let payload = {
+                        sub : user.id,
+                        name : user.name,
+                        mail : user.mail
+                    }
+            
+                    let token = jwt.sign(payload, process.env.JWT_KEY, {expiresIn: '15m'});
+                    
+                    await sendUserMail(user.mail, 
+                        'Recovery link', 
+                        'Your recovery link is: ' +
+                        host + 'recovery/change-pass?token=' + token );
+            
+                    await Users.update({
+                        code: token
+                    },
+                    {
+                        where: {
+                            name: user.name
+                        }
+                    });
 
+                    user.password = 'Password is hidden'
+
+                    return user;
+                }
+                }
             
         } catch (error) {
             throw error;
@@ -216,6 +226,7 @@ class usersServices {
                 else if (user.code !== token) {
                     throw boom.badRequest('Invalid token');
                 }else{
+                    newPassword = await bcrypt.hash(newPassword, 10);
                     await Users.update(
                         {
                         code: null,
@@ -229,6 +240,7 @@ class usersServices {
                     );
 
                     user.password = 'password is hidden';
+                    user.code = 'code is hidden'
                     return user;
                 }
             }
@@ -242,6 +254,7 @@ class usersServices {
         
     }
 
+    //To login with the local strategy
     static async getSingleUser (name){
         const user = await Users.findOne({
             where: {

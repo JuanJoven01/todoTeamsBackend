@@ -21,7 +21,6 @@ async function sendUserMail(mail, subject, text ) {
     text: text, // plain text body
   });
 
-  console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
   //
