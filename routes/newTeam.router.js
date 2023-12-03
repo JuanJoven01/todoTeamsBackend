@@ -9,16 +9,6 @@ const createTeamSchema = require('../schemas/teams.schema').createTeamSchema;
  //function create a new team by the services
 const teamsServices = require('../services/teams.services');
 
-// to get my teams
-// router.get('/', async (req, res) => {
-//   try {
-//     const team = await Teams.create(req.body);
-//     res.status(201).json(team);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// })
-
 // to create a new team
 router.post('/', 
 passport.authenticate('jwt', { session: false}),

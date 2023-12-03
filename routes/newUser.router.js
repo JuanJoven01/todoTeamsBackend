@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const usersServices = require('../services/users.service');
 const boom = require('@hapi/boom');
 const {createUserSchema, updateUserSchema, getSingleUserSchema} = require('../schemas/users.schemas');
 const activateUser = require('../services/users.service').activateUser;
 const validatorHandler = require('../middlewares/validator.handler');
 const resendActivationCode = require('../services/users.service').resendActivationCode;
-
+const usersServices = require('../services/users.service');
 
 // To create a new user, we need to validate the body of the request.
 router.post('/', 

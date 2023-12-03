@@ -94,6 +94,7 @@ class usersServices {
                     );
 
                     user.password = 'password is hidden';
+                    user.code = 'code is hidden'
                     return user;
                 }
             }
@@ -261,8 +262,13 @@ class usersServices {
                 name: name
             }
         });
-
-        return user;
+        if (!user) {
+            throw boom.badRequest('Invalid user');
+        }
+        else{
+            return user;
+        }
+        
     }
 }
 
