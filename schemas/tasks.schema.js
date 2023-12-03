@@ -1,6 +1,6 @@
 const joi = require('joi');
 
-const title = joi.string().min(4).max(30);
+const title = joi.string().min(4).max(100);
 const description = joi.string().max(300);
 const completed = joi.boolean()
 const deadline = joi.date()
@@ -16,7 +16,7 @@ const createTasksSchema = joi.object({
     deadline,
     finishedAt,
     categoryId,
-    userId: userId.required(),
+    userId,
     teamId,
 });
 
