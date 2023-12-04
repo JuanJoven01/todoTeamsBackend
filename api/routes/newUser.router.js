@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const boom = require('@hapi/boom');
-const {createUserSchema, updateUserSchema, getSingleUserSchema} = require('../schemas/users.schemas');
+const {createUserSchema} = require('../schemas/users.schemas');
 const activateUser = require('../services/users.service').activateUser;
 const validatorHandler = require('../middlewares/validator.handler');
 const resendActivationCode = require('../services/users.service').resendActivationCode;

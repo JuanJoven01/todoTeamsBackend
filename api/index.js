@@ -1,6 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const routerApi = require('./routes/index');
 
 cors = require('cors');
@@ -12,7 +13,7 @@ const {errorHandler, errorLogger, boomErrorHandler} = require('./middlewares/err
 // to get and use auth strategies
 require('./utils/auth/index');
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send('Developed by JuanJoven01!')
 })
 
