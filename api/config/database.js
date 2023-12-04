@@ -5,21 +5,21 @@ module.exports ={
     "username": process.env.POSTGRES_USER,
     "password": process.env.POSTGRES_PW,
     "database": process.env.POSTGRES_DB,
-    "host": "localhost",
-    "dialect": "postgres"
+    "host": process.env.POSTGRES_HOST,
+    "dialect": "mysql"
   },
   "test": {
     "username": process.env.POSTGRES_USER,
     "password": process.env.POSTGRES_PW,
     "database": process.env.POSTGRES_DB,
-    "host": "localhost",
-    "dialect": "postgres"
+    "host": process.env.POSTGRES_HOST,
+    "dialect": "mysql"
   },
   "production": {
     "username": process.env.POSTGRES_USER,
     "password": process.env.POSTGRES_PW,
     "database": process.env.POSTGRES_DB,
-    "host": "localhost",
-    "dialect": "postgres"
+    "host": process.env.POSTGRES_HOST,
+    "dialect": "mysql"
   }
 }
