@@ -11,7 +11,7 @@
     "db:migrate": "sequelize-cli db:migrate",
     "db:rollback": "sequelize-cli db:migrate:undo",
     "db:remove": "sequelize-cli db:migrate:undo:all",
-    "build": "npm install && sequelize init && npm run db:migrate"
+    "build": "npm install && sequelize init && npx sequelize-cli init && npm run db:migrate"
   },
   "author": "JuanJoven01",
   "license": "MIT",
