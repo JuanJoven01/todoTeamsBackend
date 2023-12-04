@@ -10,7 +10,8 @@
     "model:generate": "sequelize-cli model:generate",
     "db:migrate": "sequelize-cli db:migrate",
     "db:rollback": "sequelize-cli db:migrate:undo",
-    "db:remove": "sequelize-cli db:migrate:undo:all"
+    "db:remove": "sequelize-cli db:migrate:undo:all",
+    "build": "npm install && npm run db:migrate"
   },
   "author": "JuanJoven01",
   "license": "MIT",
