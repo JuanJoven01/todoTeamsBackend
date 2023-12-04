@@ -3,6 +3,9 @@ const app = express();
 const port = 3000;
 const routerApi = require('./routes/index');
 
+cors = require('cors');
+
+app.use(cors());
 
 const {errorHandler, errorLogger, boomErrorHandler} = require('./middlewares/error.handler');
 
@@ -10,7 +13,7 @@ const {errorHandler, errorLogger, boomErrorHandler} = require('./middlewares/err
 require('./utils/auth/index');
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('Developed by JuanJoven01!')
 })
 
 app.listen(port, () => {
