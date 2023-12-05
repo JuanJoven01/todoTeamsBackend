@@ -10,12 +10,12 @@ const checkApiKey = require('../middlewares/auth.handler');
 
 function routerApi(app,){
     app.use(checkApiKey);
-    app.use('/api/login', loginRouter)
-    app.use('/api/tasks', tasksRouter)
-    app.use('/api/teams', teamsRouter)
-    app.use('/api/new-user', newUserRouter)
-    app.use('/api/new-team', newTeamRouter)
-    app.use('/api/recovery', recoveryRouter)
+    app.use('/login', loginRouter)
+    app.use('/tasks', tasksRouter)
+    app.use('/teams', teamsRouter)
+    app.use('/new-user', newUserRouter)
+    app.use('/new-team', newTeamRouter)
+    app.use('/recovery', recoveryRouter)
 }
 
 module.exports = routerApi;

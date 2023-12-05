@@ -13,7 +13,7 @@ const {errorHandler, errorLogger, boomErrorHandler} = require('./middlewares/err
 // to get and use auth strategies
 require('./utils/auth/index');
 
-app.get('/api', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Developed by JuanJoven01!')
 })
 
