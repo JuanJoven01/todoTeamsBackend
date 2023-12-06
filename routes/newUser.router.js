@@ -35,7 +35,7 @@ router.post('/activate-user', async (req, res, next) => {
 router.post('/resend-activation', async (req, res, next) => {
     try {
         const mail =  req.body.mail;
-        const host = req.headers.host;
+        const host = req.headers.link;
         user = await resendActivationCode(mail, host);
         res.json(user);
     } catch (error) {
