@@ -12,7 +12,7 @@ validatorHandler(createUserSchema, 'body'),
 async (req, res, next) => {
   try {
     const user = await req.body;
-    const host = req.headers.host;
+    const host = req.headers.link;
     const newUser = await usersServices.newUser(user, host);
     res.json(newUser);
   } catch (error) {
