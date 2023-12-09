@@ -112,8 +112,8 @@ class usersServices {
 
     static async resendActivationCode (mail, host){
         try {
-            if (!mail | !host){
-                throw boom.badRequest('invalid User or host')
+            if (!mail || !host){
+                throw boom.badRequest('invalid Mail or host')
             }else{
                 const user = await Users.findOne({
                     where: {
