@@ -189,7 +189,7 @@ class usersServices {
                     
                     await sendUserMail(user.mail, 
                         'Recovery link', 
-                        'Your recovery link is: ' +
+                        'Your recovery link to the user'+ user.name + ' is: ' +
                         host + 'recovery/change-pass?token=' + token );
             
                     await Users.update({
