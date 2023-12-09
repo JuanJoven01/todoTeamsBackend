@@ -95,6 +95,7 @@ class usersServices {
 
                     user.password = 'password is hidden';
                     user.code = 'code is hidden'
+                    user.isActive = true;
                     return user;
                 }
             }
