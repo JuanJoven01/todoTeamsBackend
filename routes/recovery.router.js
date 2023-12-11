@@ -11,7 +11,7 @@ const updateUserSchema = require('../schemas/users.schemas').updateUserSchema;
 router.post('/', async (req, res) => {
   try {
     const mail = req.body.mail;
-    const host = req.headers.host;
+    const host = req.headers.link;
     const user = await sendRecoveryPassword(mail, host);
     res.json(user);
   } catch (error) {
