@@ -123,7 +123,7 @@ class tasksServices  {
 
     // to verify if user belongs to a team
     static async verifyTeam(user, teamId){
-        if (!teamId){
+        if (teamId == null){
             return true;
         }
         const teams = await teamsServices.getMyTeams(user.sub);
