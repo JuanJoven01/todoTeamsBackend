@@ -66,7 +66,6 @@ class tasksServices  {
                 id: taskId
             }
         });
-        return taskToUpdate;
         const witness = await verifyTeam(user, taskToUpdate.teamId);
         if (!taskToUpdate){
             throw boom.badRequest('task not found');
@@ -75,6 +74,7 @@ class tasksServices  {
             throw boom.badRequest('You are not a member of this team');
         }
         else{
+            return taskToUpdate;
             if (taskToUpdate.userId == user.sub){
                 const updatedTask = await Tasks.update(
                     {
@@ -123,6 +123,9 @@ class tasksServices  {
 
     // to verify if user belongs to a team
     static async verifyTeam(user, teamId){
+        if (!teamId){
+            return true;
+        }
         const teams = await teamsServices.getMyTeams(user.sub);
         let witness = false;
         for (let team of teams ) {
