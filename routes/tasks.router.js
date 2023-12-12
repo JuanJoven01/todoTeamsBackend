@@ -69,7 +69,7 @@ router.put ('/update-task/:taskId',
     const user = req.user;
     const taskId = req.params.taskId;
     const task = req.body;
-    const updatedTask = await tasksServices.updateTask(user, taskId, task);
+    const updatedTask = await tasksServices.updateTask(task, user, taskId);
     res.status(201).json(updatedTask);
   } catch (error) {
     next(error)
