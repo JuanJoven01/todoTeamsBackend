@@ -66,14 +66,13 @@ class tasksServices  {
                 id: taskId
             }
         });
+        return taskToUpdate;
         const witness = await verifyTeam(user, taskToUpdate.teamId);
         if (!taskToUpdate){
             throw boom.badRequest('task not found');
-            return {message: 'task not found'}; /// to try to see if witness is the problem
         }
         else if (witness == false){
             throw boom.badRequest('You are not a member of this team');
-            return {message: 'witness is the problem'}; /// to try to see if witness is the problem
         }
         else{
             if (taskToUpdate.userId == user.sub){
