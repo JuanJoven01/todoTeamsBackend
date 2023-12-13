@@ -27,7 +27,7 @@ class tasksServices  {
 
     // to create a teams tasks
     static async createTeamTasks(task, user, teamId){
-        let witness = await verifyTeam(user, teamId);
+        let witness = await this.verifyTeam(user, teamId);
         if (witness == false){
             throw boom.badRequest('You are not a member of this team');
         }else{
@@ -44,7 +44,7 @@ class tasksServices  {
 
     // to get team tasks
     static async getTeamTasks(user, teamId){
-        let witness = await verifyTeam(user, teamId);
+        let witness = await this.verifyTeam(user, teamId);
         if (witness == false){
             throw boom.badRequest('You are not a member of this team');
         }else{
@@ -66,7 +66,7 @@ class tasksServices  {
                 id: taskId
             }
         });
-        const witness = await verifyTeam(user, taskToUpdate.teamId);
+        const witness = await this.verifyTeam(user, taskToUpdate.teamId);
         if (!taskToUpdate){
             throw boom.badRequest('task not found');
         }
@@ -74,7 +74,6 @@ class tasksServices  {
             throw boom.badRequest('You are not a member of this team');
         }
         else{
-            return taskToUpdate;
             if (taskToUpdate.userId == user.sub){
                 const updatedTask = await Tasks.update(
                     {
@@ -100,7 +99,7 @@ class tasksServices  {
                 id: taskId
             }
         });
-        const witness = await verifyTeam(user, taskToDelete.teamId);
+        const witness = await this.verifyTeam(user, taskToDelete.teamId);
         if (!taskToDelete){
             throw boom.badRequest('task not found');
         }
