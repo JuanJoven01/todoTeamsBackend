@@ -19,6 +19,19 @@ router.get('/',
   }
 });
 
+router.get('/:taskId',
+  passport.authenticate('jwt', { session: false}),
+  async (req, res, next) => {
+  try {
+    const user = req.user;
+    const taskId = req.params.taskId;
+    const task = await tasksServices.getTask(user, taskId);
+    res.json(task);
+  } catch (error) {
+    next(error)
+  }
+});
+
 router.post('/create-single-task',
   passport.authenticate('jwt', { session: false}),
   validatorHandler(createTasksSchema, 'body'),
@@ -88,6 +101,8 @@ router.delete ('/delete-task/:taskId',
     next(error)
   }
 });
+
+
 
 
 

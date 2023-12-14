@@ -6,7 +6,7 @@ class tasksServices  {
     constructor() {
 
     }
-    //to get my single task
+    //to get my single tasks
     static async getMyTasks(user){
         const tasks = await Tasks.findAll({
             where: {
@@ -16,6 +16,26 @@ class tasksServices  {
         });
         return tasks;
     }
+    // to get a single task
+    static async getTask(user, taskId){
+        const task = await Tasks.findOne({
+            where: {
+                id: taskId
+            }
+        });
+        if (!task){
+            throw boom.badRequest('task not found');
+        }
+        else if (task.userId == user.sub){
+            return task;
+        }
+        else{
+            throw boom.badRequest('You are not the owner of this task');
+        }
+    }
+    
+
+
     // to create a single task
     static async createTask(task, user){
         const newTask = await Tasks.create({
