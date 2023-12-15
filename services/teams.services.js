@@ -26,12 +26,9 @@ class teamsServices {
     // Function to create a new Team
     static async createTeam(team, user){
         team.admin = user.username;
-        console.log(team)
-        console.log(user)
         const newTeam = await Teams.create(
             team
         );
-        console.log(newTeam)
         await Users_Teams.create({
             userId: user.sub,
             teamId: newTeam.id

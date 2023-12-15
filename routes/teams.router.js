@@ -37,6 +37,20 @@ passport.authenticate('jwt', { session: false}),
     }
 )
 
+router.post ('/create-team',
+passport.authenticate('jwt', { session: false}),
+    async (req, res, next) => {
+        try {
+            const body = req.body
+            const user = req.user
+            const team = await teamsServices.createTeam(body, user)
+            res.json(team)
+        } catch (error) {
+            next(error)
+        }
+    }
+)
+
 router.get('/my-invitations',
 passport.authenticate('jwt', { session: false}),
     async (req, res, next) => {
