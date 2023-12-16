@@ -77,6 +77,20 @@ router.patch('/accept-invitation/:id',
     }
 )
 
+// to reject a invitation
+router.patch('/reject-invitation/:id',
+    passport.authenticate('jwt', { session: false}),
+    async (req, res, next) => {
+        try {
+            const user = req.user
+            const invitation = await teamsServices.rejectInvitation(user.sub, req.params.id)
+            res.json(invitation)
+        } catch (error) {
+            next(error)
+        } 
+    }
+)
+
 
 
 

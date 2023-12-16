@@ -85,6 +85,26 @@ class teamsServices {
             throw boom.badRequest('Invalid invitation')
         }
     }
+
+    // to decline an invitation
+    static async rejectInvitation(userId, invitationId){
+        const invitation = await Invitations.findByPk(invitationId);
+        if (invitation.receiverId === userId){
+            await Invitations.update(
+                {
+                    status: 'rejected',
+                },
+                {
+                    where: {
+                        id: invitationId
+                    }
+                }
+            );
+            return 'Invitation rejected'
+        }else{
+            throw boom.badRequest('Invalid invitation')
+        }
+    }
    
 
 }
