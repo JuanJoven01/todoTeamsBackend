@@ -52,7 +52,10 @@ class teamsServices {
             where: {
                 receiverId: userId,
                 status: 'pending'
-            }
+            },
+            include: [{
+                association: 'teams',
+            }]
         });
         return invitations;
     }
