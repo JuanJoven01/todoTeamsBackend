@@ -19,11 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Tasks,{
         as: 'tasks',
         foreignKey: 'teamId'
-      }),
-      this.hasMany(models.Invitations,{
-        as: 'invitations',
-        foreignKey: 'teamId'
-      }) 
+      })
       
     }
   }
