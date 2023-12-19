@@ -19,12 +19,13 @@ app.get('/', (req, res) => {
 
 
 app.use(express.json());
+
+routerApi(app);
+
 app.use(errorLogger);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
-
-routerApi(app);
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
