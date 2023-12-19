@@ -1,6 +1,6 @@
 function errorLogger (error, req, res, next) {
     console.log('Error logger', error)
-    console.error(error.stack);
+    console.error(error.stack, 'is this the error');
     
     next(error);
     }
