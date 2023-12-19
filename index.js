@@ -17,9 +17,6 @@ app.get('/', (req, res) => {
     res.send('Developed by JuanJoven01!')
 })
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-});
 
 app.use(express.json());
 app.use(errorLogger);
@@ -28,3 +25,8 @@ app.use(errorHandler);
 
 
 routerApi(app);
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+});
+
