@@ -121,7 +121,6 @@ class usersServices {
                         mail: mail
                     }
                 });
-                console.log(user)
                 if (!user) {
                     throw boom.badRequest('Invalid user');
                 }
