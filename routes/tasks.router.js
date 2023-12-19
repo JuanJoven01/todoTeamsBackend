@@ -37,6 +37,7 @@ router.post('/create-single-task',
   validatorHandler(createTasksSchema, 'body'),
   async (req, res, next) => {
   try {
+    console.log('entering to create single task')
     const task = req.body;
     const user = req.user;
     const newTask = await tasksServices.createTask(task, user);

@@ -38,6 +38,7 @@ class tasksServices  {
 
     // to create a single task
     static async createTask(task, user){
+        console.log('entering to create single task')
         const newTask = await Tasks.create({
             ...task,
             userId: user.sub
