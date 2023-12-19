@@ -3,12 +3,6 @@ function errorLogger (error, req, res, next) {
     next(error);
     }
 
-function errorHandler (error, req, res, next) {
-  res.status(500).json({ 
-        message: error.message,
-        stack: error.stack
-    });
-}
 
 function boomErrorHandler (error, req, res, next) {
   if (error.isBoom) {
@@ -18,5 +12,14 @@ function boomErrorHandler (error, req, res, next) {
   next(error);
   }
 }
+
+function errorHandler (error, req, res, next) {
+  res.status(500).json({ 
+        message: error.message,
+        stack: error.stack
+    });
+}
+
+
 
 module.exports = {errorHandler, errorLogger, boomErrorHandler};
