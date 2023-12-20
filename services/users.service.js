@@ -247,7 +247,7 @@ class usersServices {
             }
         } catch (error) {
             if (error.name === 'TokenExpiredError') {
-                boom.badRequest('Token expired');
+                throw boom.badRequest('Token expired');
               } else {
                 throw error
               }
@@ -263,7 +263,7 @@ class usersServices {
             }
         });
         console.log(user)
-        if (!user) {
+        if (user === null) {
             throw boom.badRequest('Invalid user');
         }
         else{

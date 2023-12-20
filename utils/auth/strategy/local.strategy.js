@@ -12,7 +12,7 @@ const localStrategy = new Strategy(
     async (name, password, done)=> {
     try {
         const user = await getSingleUser(name);
-        console.log(user)
+        
         if (!user) {
             return done(boom.unauthorized('User not found'), false)
         }
