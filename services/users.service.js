@@ -101,7 +101,7 @@ class usersServices {
             }
         } catch (error) {
             if (error.name === 'TokenExpiredError') {
-                boom.badRequest('Token expired');
+                throw boom.badRequest('Token expired');
               } else {
                 throw error
               }
@@ -140,7 +140,10 @@ class usersServices {
                     await sendUserMail(user.mail, 
                         'Activation link', 
                         'Your activation link is: ' +
-                        host + '/activate-user?token=' + token );
+                        host + '/activate-user?token=' + token + '\n' 
+                        + 'If your activation link does not work, copy and paste the following token in your browser: \n '
+                        + token
+                        );
             
                     await Users.update({
                         code: token
@@ -190,7 +193,11 @@ class usersServices {
                     await sendUserMail(user.mail, 
                         'Recovery link', 
                         'Your recovery link to the user '+ user.name + ' is: ' +
-                        host + 'recovery/change-pass?token=' + token );
+                        host + 'recovery-password/change-pass?token=' + token + '\n' 
+                        + 'If your activation link does not work, copy and paste the following token in your browser: \n '
+                        + token
+                        
+                        );
             
                     await Users.update({
                         code: token
@@ -262,7 +269,6 @@ class usersServices {
                 name: name
             }
         });
-        console.log(user)
         if (user === null) {
             throw boom.badRequest('Invalid user');
         }
