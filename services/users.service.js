@@ -48,7 +48,8 @@ class usersServices {
             
             await sendUserMail(newUser.mail, 
                 'Activation link', 
-                'Your activation link is: ' + host + '/activate-user?token=' + token );
+                'Your activation code is: ' + token + '\n' +
+                'Go to ' +host + 'to activate your account');
 
             await Users.update({
                 code: token
@@ -138,11 +139,10 @@ class usersServices {
                     let token = jwt.sign(payload, process.env.JWT_KEY, {expiresIn: '15m'});
                     
                     await sendUserMail(user.mail, 
-                        'Activation link', 
-                        'Your activation link is: ' +
-                        host + '/activate-user?token=' + token + '\n' 
-                        + 'If your activation link does not work, copy and paste the following token in your browser: \n '
-                        + token
+                        'Activation code', 
+                        'Your activation code is: ' +
+                        host + '/activate-user?token=' + token + '\n' +
+                        'Go to ' +host + 'to activate your account'
                         );
             
                     await Users.update({
@@ -192,10 +192,8 @@ class usersServices {
                     
                     await sendUserMail(user.mail, 
                         'Recovery link', 
-                        'Your recovery link to the user '+ user.name + ' is: ' +
-                        host + 'recovery-password/change-pass?token=' + token + '\n' 
-                        + 'If your activation link does not work, copy and paste the following token in your browser: \n '
-                        + token
+                        'Your recovery link to the user '+ user.name + ' is: ' +  token + '\n' +
+                        'Go to ' +host + 'to activate your account'
                         
                         );
             
